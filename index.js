@@ -4,6 +4,10 @@ const fs = require('fs');
 var data = require('./data.json');
 var token = require('./token.json');
 
+/*
+Discord bot made for Civilous' SCPF Engineering & Technical Services Department by mesemi#0758 (with help from Neostant#9194)
+*/
+
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 	client.guilds.cache.forEach(guild => {
@@ -20,9 +24,9 @@ function saveData() {
 client.on ('message', async message => {
 
     function checkAdmin() {
-        if (message.member.roles.cache.has('870461579106320424')) {
+        if (message.member.roles.cache.has('870461579106320424')) { //ent bot admin in main ent server
             return true;
-        } else if (message.channel.topic == 'aBcdEf154') {
+        } else if (message.channel.topic == 'aBcdEf154') { // making admin perms work in #admin-perms
             return true;
         } else {
             return false;
