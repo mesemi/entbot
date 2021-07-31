@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
 var data = require('./data.json');
-var token = require('./token.js');
+var token = require('./token.json');
 
 client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
@@ -176,4 +176,4 @@ client.on ('message', async message => {
 
 
 
-client.login(token.myv);
+client.login(token.token);
