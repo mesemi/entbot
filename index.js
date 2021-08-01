@@ -34,22 +34,22 @@ client.on ('message', async message => {
     }
 
     var prefix = '!';
-    if (message.content.startsWith(prefix)){
-        var command = message.content.slice (prefix.length).split(" ")[0],
+    if (message.content.startsWith(prefix)){ // make sure the prefix is present in the message
+        var command = message.content.slice (prefix.length).split(" ")[0], // cut out out the prefix for just the command and the arguments
             arg1 = message.content.split(" ")[1];
-            arg2 = message.content.split(" ")[1];
-            arg3 = message.content.split(" ")[1];
+            arg2 = message.content.split(" ")[2];
+            arg3 = message.content.split(" ")[3];
     } else {
-        return;
+        return; // if it isnt the prefix just drop it
     }
 
-    switch (command) {
+    switch (command) { // check which command is used from the cut out variable
         // normal commands
         case "total": //!total - show totals of hydrants/turbines | !total (hydrants/turbines) show specifics
             var daReq = message.author.id;
             console.log("Total command sent by " + message.author.username);
 
-            if (!data.users[daReq]) {
+            if (!data.users[daReq]) { // incase there is no data present, make some.
                 data.users[daReq] = {
                     "hydrants": 0,
                     "turbines": 0
@@ -69,7 +69,7 @@ client.on ('message', async message => {
             break;
         case "repair": //adding +1 to hydrants/turbines if registered a repair
             var daReq = message.author.id;
-            console.log('Repair command sent by' + message.author.username);
+            console.log('Repair command sent by ' + message.author.username);
 
             if (!data.users[daReq]) {
                 data.users[daReq] = {
@@ -79,19 +79,18 @@ client.on ('message', async message => {
             }
 
             if (arg1 != null) {
-                if (arg1.toLowerCase() == "Hydrant") {
-                    data.users[daReq].hydrants += 1;
-                    saveData()
-                    message.channel.send('You have fixed a hydrant. Your total is now ' + data.users[daReq].hydrants + '.');
-                } else if (arg1.toLowerCase() == "turbine") {
-                    data.users[daReq].turbines += 1;
-                    saveData()
-                    message.channel.send('You have fixed a turbine. Your total is now ' + data.users[daReq].turbines + '.');
+                var rData = data.users[daReq][arg1.toLowerCase() + 's'];
+                if (rData != null) {
+                    data.users[daReq][arg1.toLowerCase() + 's'] += 1
+                    saveData();
+                    message.channel.send('You have repaired a ' + arg1.toLowerCase() + '. Your new total is ' + data.users[daReq][arg1.toLowerCase() + 's'] + '.')
                 } else {
                     message.channel.send("Invalid request.");
+                    break;
                 }
             } else {
                 message.channel.send("Missing arguments.");
+                break;
             }
             break;
         // admin commands
@@ -129,12 +128,16 @@ client.on ('message', async message => {
                     data.users[arg5][arg2.toLowerCase()] = arg4;
                     saveData();
                     message.channel.send("The " + arg2 + " repaired for <@" + arg5 + "> has been changed to " + arg4);
+                    break;
                 } else {
                     message.reply("Missing arguments.");
+                    break;
                 }
             } else {
                 message.reply("Insufficient permissions.");
+                break;
             }
+            break;
         case 'ctotal': // checks specific user's totals
             console.log("ctotal command sent by " + message.author.username);
             if (checkAdmin()){
