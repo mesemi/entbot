@@ -1,7 +1,6 @@
 const { Client, Collection, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const fs = require('fs');
-var data = require('./data.json');
 var token = require('./token.json');
 client.commands = new Collection();
 
