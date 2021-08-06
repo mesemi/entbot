@@ -1,18 +1,27 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client, Collection, Intents } = require('discord.js');
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const fs = require('fs');
 var data = require('./data.json');
 var token = require('./token.json');
+client.commands = new Collection();
 
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const clearArray = []
+client.application?.commands.set(clearArray);
+
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	client.guilds.cache.get('870841351212785664')?.commands.set(command.name, command);
+}
 /*
 Discord bot made for Civilous' SCPF Engineering & Technical Services Department by mesemi#0758 (with help from Neostant#9194)
 */
 
-client.on('ready', () => {
+client.once('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 	client.guilds.cache.forEach(guild => {
 		console.log(`${guild.name} | ${guild.id}`);
-	  })
+    })
 });
 
 function saveData() {
@@ -21,6 +30,20 @@ function saveData() {
 	});
 }
 
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isCommand()) return;
+
+	if (!client.commands.has(interaction.commandName)) return;
+
+	try {
+		await client.commands.get(interaction.commandName).execute(interaction);
+	} catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	}
+});
+
+/*
 client.on ('message', async message => {
 
     function checkAdmin() {
@@ -178,7 +201,7 @@ client.on ('message', async message => {
     }
 
 })
-
+*/
 
 
 
