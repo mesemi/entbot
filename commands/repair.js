@@ -18,6 +18,12 @@ module.exports = {
 		],
 	}],
 	async execute(interaction) {
+		function saveData() {
+			fs.writeFile('data.json', JSON.stringify(data), function (err) { 
+				if (err) throw err;
+			});
+		}
+
 		var data = require('./data.json');
 		var daReq = interaction.user.id;
 
@@ -30,6 +36,7 @@ module.exports = {
 
 		const repairthingy = interaction.options.getString('repair');
 		data.users[daReq][repairthingy] += 1
+		saveData();
 		interaction.reply({content: 'You have repaired a ' + repairthingy.splice(0, -1) + '. Your new total is ' + data.users[daReq][repairthingy] + '.', ephemeral: true});
 		
 	},

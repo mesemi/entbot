@@ -10,31 +10,14 @@ module.exports = {
 		}
 	],
 	async execute(interaction) {
+
+		if (!interaction.user.roles.cache.has('870461579106320424') || !interaction.channel.name === 'admin-perms') { interaction.reply({content: "Insufficent permissions.", ephemeral: true}); return; }
+
 		var data = require('./data.json');
 
 		const daReqs = interaction.options.getString('daReq');
 
-		interaction.reply("<@" + daReqs + "> has repaired " + data.users[daReqs].hydrants + " hydrants and " + data.users[daReqs].turbines + " turbines.")
+		interaction.reply({content: "<@" + daReqs + "> has repaired " + data.users[daReqs].hydrants + " hydrants and " + data.users[daReqs].turbines + " turbines.", ephemeral: true})
 
-
-		console.log("ctotal command sent by " + message.author.username);
-            if (checkAdmin()){
-                console.log('ctotal successfully sent');
-                if (arg1 != null){ // the same stupid check
-                    if (arg1.startsWith('<')) {
-                        var arg5 = arg1.slice(3, -1);
-                    } else {
-                        var arg5 = arg1
-                    }
-                    message.channel.send("<@" + arg5 + "> has repaired " + data.users[arg5].hydrants + " hydrants and " + data.users[arg5].turbines + " turbines.")
-
-                } else {
-                    message.reply("Missing arguments.");
-
-                }
-            } else {
-                message.reply("Insufficient permissions.");
-
-            }
 	},
 };
