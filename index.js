@@ -6,13 +6,12 @@ var token = require('./token.json');
 client.commands = new Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-const clearArray = []
-client.application?.commands.set(clearArray);
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
-	client.guilds.cache.get('870841351212785664')?.commands.set(command.name, command);
+    client.commands.set(command.name, command);
 }
+
 /*
 Discord bot made for Civilous' SCPF Engineering & Technical Services Department by mesemi#0758 (with help from Neostant#9194)
 */
@@ -39,7 +38,7 @@ client.on('interactionCreate', async interaction => {
 		await client.commands.get(interaction.commandName).execute(interaction);
 	} catch (error) {
 		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		return interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
 
