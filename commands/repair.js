@@ -3,7 +3,7 @@ module.exports = {
 	description: 'Adds a repair.',
 	options: [
 		{
-		name: 'repair',
+		name: 'item',
 		description: 'Item repaired',
 		type: 'STRING',
 		required: true,
@@ -37,10 +37,10 @@ module.exports = {
 			}
 		}
 
-		const repairthingy = interaction.options.getString('repair');
+		const repairthingy = interaction.options.getString('item');
 		data.users[daReq][repairthingy] += 1
 		saveData();
-		interaction.reply({content: 'You have repaired a ' + repairthingy.splice(0, -1) + '. Your new total is ' + data.users[daReq][repairthingy] + '.', ephemeral: true});
+		interaction.reply({content: 'You have repaired a ' + repairthingy.slice(0, -1) + '. Your new total is ' + data.users[daReq][repairthingy] + '.', ephemeral: true});
 		
 	},
 };

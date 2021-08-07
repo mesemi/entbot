@@ -3,13 +3,13 @@ module.exports = {
 	description: 'Changes values of other users.',
 	options: [
 		{
-			name: "daMention",
+			name: "damention",
 			description: "User being changed.",
 			type: "USER",
 			required: true,
 		},
 		{
-			name: "daChange",
+			name: "dachange",
 			description: "Item being changed.",
 			type: "STRING",
 			required: true,
@@ -25,7 +25,7 @@ module.exports = {
 			]
 		},
 		{
-			name: "daValue",
+			name: "davalue",
 			description: "Value the item is being changed to.",
 			type: "INTEGER",
 			required: true,
@@ -39,22 +39,27 @@ module.exports = {
 			});
 		}
 		var data = require('./data.json');
-		const daMention = interaction.options.getString("daMention");
-		const daChange = interaction.options.getString("daChange");
-		const daValue = interaction.options.getInteger("daValue");
+		const daMention = interaction.options.getUser("damention");
+		const daChange = interaction.options.getString("dachange");
+		const daValue = interaction.options.getInteger("davalue");
 		console.log(daMention, daChange, daValue);
 
-		if (!interaction.user.roles.cache.has('870461579106320424') || !interaction.channel.name === 'admin-perms') { interaction.reply({content: "Insufficent permissions.", ephemeral: true}); return; }
+		//daRolez = guild.member.fetch(daMention)
 
-		if (!data.users[daMention]) {
-			data.users[daMention] = {
-				"hydrants": 0,
-				"turbines": 0
+		if (interaction.channel.name === 'admin-perms') {
+
+			if (!data.users[daMention.id]) {
+				data.users[daMention.id] = {
+					"hydrants": 0,
+					"turbines": 0
+				}
 			}
-		}
 
-		data.users[daMention][daMention] = daValue;
-		saveData();
-		interaction.reply({content: "The " + daChange + " repaired for <@" + daMention + "> has been changed to " + daValue, ephemeral: true});
+			data.users[daMention.id][daChange] = daValue;
+			saveData();
+			interaction.reply({content: "The " + daChange + " repaired for <@" + daMention + "> has been changed to " + daValue, ephemeral: true});
+		} else {
+			interaction.reply({content: "Insufficent permissions.", ephemeral: true}); return;
+		};
 	},
 };

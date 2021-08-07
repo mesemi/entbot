@@ -6,13 +6,9 @@ client.commands = new Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-client.application?.commands.set([]);
-
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
-    //const tents = client.commands.set(command.name, command);
-	console.log(command);
-	//console.log(tents);
+	client.commands.set(command.name, command);
 }
 
 /*
@@ -25,6 +21,7 @@ client.once('ready', () => {
 		console.log(`${guild.name} | ${guild.id}`);
     })
 });
+
 
 
 client.on('interactionCreate', async interaction => {
