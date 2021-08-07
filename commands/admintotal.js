@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'admintotal',
-	description: 'Replies with Pong!',
+	description: 'Replies with total of all users.',
 	async execute(interaction) {
 		var data = require('./data.json');
 		if (interaction.channel.name === 'admin-perms') {

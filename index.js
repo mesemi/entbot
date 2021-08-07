@@ -6,9 +6,13 @@ client.commands = new Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
+client.application?.commands.set([]);
+
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
-    client.commands.set(command.name, command);
+    //const tents = client.commands.set(command.name, command);
+	console.log(command);
+	//console.log(tents);
 }
 
 /*

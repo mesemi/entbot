@@ -1,7 +1,8 @@
 module.exports = {
 	name: 'repair',
 	description: 'Adds a repair.',
-	options: [{
+	options: [
+		{
 		name: 'repair',
 		description: 'Item repaired',
 		type: 'STRING',
@@ -16,8 +17,10 @@ module.exports = {
 				value: "turbines",
 			},
 		],
-	}],
+		}
+	],
 	async execute(interaction) {
+		const fs = require('fs');
 		function saveData() {
 			fs.writeFile('data.json', JSON.stringify(data), function (err) { 
 				if (err) throw err;

@@ -32,6 +32,7 @@ module.exports = {
 		}
 	],
 	async execute(interaction) {
+		const fs = require('fs');
 		function saveData() {
 			fs.writeFile('data.json', JSON.stringify(data), function (err) { 
 				if (err) throw err;
