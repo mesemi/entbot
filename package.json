@@ -1,0 +1,19 @@
+{
+  "name": "entbot",
+  "version": "2.0.0",
+  "description": "Bot made for Civilous' SCPF Engineering and Technical Department",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "discord.js": "^13.0.1",
+    "node": "^16.6.1"
+  },
+  "engines": {
+    "node": "16.6.1"
+  },
+  "repository": {
+    "url": ""
+  }
+}
