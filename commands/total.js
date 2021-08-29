@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'total',
-	description: 'Shows total repairsS!',
+	description: 'Shows total repairs!',
 	async execute(interaction) {
         var data = require('./data.json');
 		var daReq = interaction.user.id;
