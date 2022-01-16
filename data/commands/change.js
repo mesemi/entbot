@@ -20,8 +20,8 @@ module.exports = {
                   .setRequired(true)),
 	async execute(client, interaction) {
 		const fs = require('fs');
-		function saveData() {fs.writeFile('/app/data/json/data.json', JSON.stringify(data), function (err) { if (err) throw err;});}
-		var data = require('/app/data/json/data.json');
+		function saveData() {fs.writeFile('/app/.data/data.json', JSON.stringify(data), function (err) { if (err) throw err;});}
+		var data = require('/app/.data/data.json');
 		const daMention = interaction.options.getUser("damention");
 		const daChange = interaction.options.getString("dachange");
 		const daValue = interaction.options.getInteger("davalue");

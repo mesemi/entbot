@@ -12,12 +12,12 @@ module.exports = {
                   .addChoice('end', 'end')),
 	async execute(client, interaction) {
         const fs = require('fs');
-        const activities = require('/app/data/json/activity.json');
+        const activities = require('/app/.data/activity.json');
         const request = interaction.options.getString("request");
         const playa = interaction.user.id;
         const { MessageEmbed } = require('discord.js');
         function saveDatai() {
-            fs.writeFile('/app/data/json/activity.json', JSON.stringify(activities), function (err) { 
+            fs.writeFile('/app/.data/activity.json', JSON.stringify(activities), function (err) {
                 if (err) throw err;
             });
         }

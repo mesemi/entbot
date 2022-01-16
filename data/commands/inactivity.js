@@ -18,14 +18,14 @@ module.exports = {
                   .setDescription('Provide a reason for starting inactivity.')),
 	async execute(client, interaction) {
         const fs = require('fs');
-        const inactivities = require('/app/data/json/inactivity.json');
+        const inactivities = require('/app/.data/inactivity.json');
         const request = interaction.options.getString("request");
         const enddate = interaction.options.getString("enddate");
         const reason = interaction.options.getString("reason");
         const playa = interaction.user.id;
         const { MessageEmbed } = require('discord.js');
         function saveDatai() {
-            fs.writeFile('/app/data/json/inactivity.json', JSON.stringify(inactivities), function (err) { 
+            fs.writeFile('/app/.data/inactivity.json', JSON.stringify(inactivities), function (err) {
                 if (err) throw err;
             });
         }

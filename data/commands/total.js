@@ -8,7 +8,7 @@ module.exports = {
           option.setName('user')
                 .setDescription('User being checked.')),
 	async execute(client, interaction) {
-        var data = require('/app/data/json/data.json');
+        var data = require('/app/.data/data.json');
 		    var daReq = interaction.user.id;
         var theRequest = interaction.options.getUser('user');
 

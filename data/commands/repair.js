@@ -13,12 +13,12 @@ module.exports = {
 	async execute(client, interaction) {
 		const fs = require('fs');
 		function saveData() {
-			fs.writeFile('/app/data/json/data.json', JSON.stringify(data), function (err) { 
+			fs.writeFile('/app/.data/data.json', JSON.stringify(data), function (err) {
 				if (err) throw err;
 			});
 		}
 
-		var data = require('/app/data/json/data.json');
+		var data = require('/app/.data/data.json');
 		var daReq = interaction.user.id;
 
 		if (!data.users[daReq]) {
@@ -32,6 +32,6 @@ module.exports = {
 		data.users[daReq][repairthingy] += 1
 		saveData();
 		interaction.reply({content: 'You have repaired a ' + repairthingy.slice(0, -1) + '. Your new total is ' + data.users[daReq][repairthingy] + '.', ephemeral: true});
-		
+
 	},
 };
