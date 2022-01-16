@@ -39,7 +39,7 @@ module.exports = {
 			}
 
 			data.users[daMention.id][daChange] = daValue;
-			fs.writeFile('/app/data/json/data.json', JSON.stringify(data), function (err) { if (err) throw err;});
+			fs.writeFile('/app/.data/data.json', JSON.stringify(data), function (err) { if (err) throw err;});
 			interaction.reply({content: "The " + daChange + " repaired for <@" + daMention + "> has been changed to " + daValue, ephemeral: true});
 		} else {
 			interaction.reply({content: "Insufficent permissions.", ephemeral: true}); return;
