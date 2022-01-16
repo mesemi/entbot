@@ -1,8 +1,11 @@
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
 module.exports = {
-	name: 'admintotal',
-	description: 'Replies with total of all users.',
-	async execute(interaction) {
-		var data = require('./data.json');
+  data: new SlashCommandBuilder()
+          .setName('admintotal')
+          .setDescription('Replies with total of all users.'),
+	async execute(client, interaction) {
+		var data = require('/app/data/json/data.json');
 		if (interaction.channel.name === 'admin-perms') {
 			var Content = 'Here is your status report:\n\n'
 			for (const [key, value] of Object.entries(data.users)) {
