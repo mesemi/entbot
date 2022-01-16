@@ -3,10 +3,10 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 const fs = require('fs');
 client.commands = new Collection();
 
-const commandFiles = fs.readdirSync('./data/commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-	const command = require(`./data/commands/${file}`);
+	const command = require(`./commands/${file}`);
 	client.commands.set(command.data.name, command);
 }
 
