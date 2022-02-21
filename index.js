@@ -39,7 +39,7 @@ client.on('interactionCreate', async interaction => {
 client.on('guildMemberRemove', async member => {
   var data = require('/app/.data/data.json')
   console.log("occured")
-  delete data.users[member.id]
+  delete data.users[member.id];
   fs.writeFile('/app/.data/data.json', JSON.stringify(data), function (err) { if (err) throw err;});
 })
 
