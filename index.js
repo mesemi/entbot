@@ -23,26 +23,36 @@ Discord bot made for Civilous' SCPF Engineering & Technical Services Department 
 
 client.once('ready', () => {
 	console.log(`[E&T Bot] Logged in! ✔️`);
-	console.log(`[ScD Bot] Currently registered data files: ` + dataFiles)
+	console.log(`[E&T Bot] Currently registered data files: ` + dataFiles)
 });
 
 
 client.on('interactionCreate', async interaction => {
-
-	if (!interaction.isCommand()) return;
-
-	const command = client.commands.get(interaction.commandName);
-
-	if (!command) return;
-
-	try {
-		await command.execute(client, interaction);
-	} catch (error) {
-    console.log('[E&T Bot] There was an error while trying to execute ' + interaction.commandName + ' ❌')
-		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-	}
+  if (interaction.isCommand()) {
+      const command = client.commands.get(interaction.commandName);
+      if (!command) return;
+      try {
+        await command.execute(client, interaction);
+      } catch (error) {
+        console.log('[E&T Bot] There was an error while trying to execute: ' + command + ' ❌')
+        console.error(error);
+        return interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+      }
+  } else if (interaction.isButton()) {
+      const button = client.buttons.get(interaction.customId)
+      if (!button) return;
+      try {
+        await button.execute(client, interaction);
+      } catch (error) {
+        console.log('[E&T Bot] There was an error while trying to respond to button: ' + button + ' ❌')
+        console.error(error);
+        return interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+      }
+  } else {
+    return;
+  }
 });
+
 
 client.on('guildMemberRemove', async member => {
   var data = require('/app/.data/data.json')
