@@ -16,18 +16,18 @@ module.exports = {
 		const row = new MessageActionRow()
 				.addComponents(
 					new MessageButton()
-						.setCustomId('testaccept')
+						.setCustomId('appaccept')
 						.setLabel('Accept')
 						.setStyle('SUCCESS'),
 					new MessageButton()
-						.setCustomId('testdeny')
+						.setCustomId('appdeny')
 						.setLabel('Deny')
 						.setStyle('DANGER')
 				);
 
 				const theEmbed = new MessageEmbed()
 						.setColor('#233287')
-						.setTitle(interaction.member.displayName + "'s Test")
+						.setTitle(interaction.member.displayName + "'s Application")
 						.setAuthor(interaction.member.displayName, interaction.user.avatarURL())
 						.setDescription(test)
 						.setTimestamp()
